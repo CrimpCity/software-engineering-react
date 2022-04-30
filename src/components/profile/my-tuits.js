@@ -1,4 +1,4 @@
-import {useEffect, useState} from "react";
+import { useEffect, useState } from "react";
 import * as service from "../../services/tuits-service";
 import Tuits from "../tuits";
 
@@ -8,9 +8,9 @@ const MyTuits = () => {
         service.findTuitByUser("my")
             .then(tuits => setTuits(tuits));
     useEffect(findMyTuits, []);
-    return(
+    return (
         <Tuits tuits={tuits}
-               refreshTuits={findMyTuits}/>
+            refreshTuits={findMyTuits} />
     );
 };
 
