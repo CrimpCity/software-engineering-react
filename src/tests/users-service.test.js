@@ -1,3 +1,5 @@
+import 'regenerator-runtime/runtime'
+
 import {
   createUser,
   deleteUsersByUsername, findAllUsers,
@@ -23,7 +25,7 @@ describe('createUser', () => {
     // remove any data we created
     return deleteUsersByUsername(ripley.username);
   })
-
+  
   test('can insert new users with REST API', async () => {
     // insert new user in the database
     const newUser = await createUser(ripley);
@@ -65,7 +67,7 @@ describe('deleteUsersByUsername', () => {
   });
 });
 
-describe('findUserById',  () => {
+describe('findUserById', () => {
   // sample user we want to retrieve
   const adam = {
     username: 'adam_smith',
@@ -105,7 +107,7 @@ describe('findUserById',  () => {
 });
 
 
-describe('findAllUsers',  () => {
+describe('findAllUsers', () => {
 
   // sample users we'll insert to then retrieve
   const usernames = [

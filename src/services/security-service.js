@@ -1,5 +1,6 @@
 import axios from "axios";
-
+// Need to fix "Network Error Jest: with local http import for axios
+axios.defaults.adapter = require('axios/lib/adapters/http');
 
 const BASE_URL = "http://localhost:4000";
 const SECURITY_API = `${BASE_URL}/api/auth`
