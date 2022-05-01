@@ -4,13 +4,13 @@ import Tuit from "./tuit";
 import * as likesService from "../../services/likes-service";
 import * as service from "../../services/tuits-service";
 const Tuits = ({ tuits = [], refreshTuits }) => {
+
   const likeTuit = (tuit) =>
-    likesService.userLikesTuit("me", tuit._id)
-      .then(refreshTuits)
-      .catch(e => alert(e))
+    likesService.userLikesTuit("me", tuit._id).then(refreshTuits).catch(e => alert(e))
+
   const deleteTuit = (tid) =>
-    service.deleteTuit(tid)
-      .then(refreshTuits);
+    service.deleteTuit(tid).then(refreshTuits);
+
 
   return (
     <div>
