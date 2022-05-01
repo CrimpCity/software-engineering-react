@@ -1,6 +1,7 @@
 import Tuits from "../tuits";
 import * as service from "../../services/likes-service";
-import {useEffect, useState} from "react";
+import { useEffect, useState } from "react";
+
 
 const MyLikes = () => {
     const [likedTuits, setLikedTuis] = useState([]);
@@ -8,10 +9,10 @@ const MyLikes = () => {
         service.findAllTuitsLikedByUser("me")
             .then((tuits) => setLikedTuis(tuits));
     useEffect(findTuitsILike, []);
-    
-    return(
+
+    return (
         <div>
-            <Tuits tuits={likedTuits} refreshTuits={findTuitsILike}/>
+            <Tuits tuits={likedTuits} refreshTuits={findTuitsILike} />
         </div>
     );
 };
