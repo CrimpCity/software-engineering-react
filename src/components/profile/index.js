@@ -4,8 +4,8 @@ import { HashRouter, Link, Route, Routes, useNavigate, useLocation } from "react
 import * as service from "../../services/auth-service";
 import TuitsAndReplies from "./tuits-and-replies";
 import Media from "./media";
-import MyLikes from "./my-likes";
-import MyDislikes from "./my-dislikes";
+import MyLikes from "./my-likes.js";
+import MyDislikes from "./my-dislikes.js";
 
 
 const Profile = () => {
@@ -24,6 +24,8 @@ const Profile = () => {
     service.logout()
       .then(() => navigate('/login'));
   }
+
+
   return (
     <div className="ttr-profile">
       <div className="border border-bottom-0">
@@ -89,6 +91,11 @@ const Profile = () => {
               <Link to="/profile/likes"
                 className={`nav-link ${location.pathname.indexOf('likes') >= 0 ? 'active' : ''}`}>
                 Likes</Link>
+            </li>
+            <li className="nav-item">
+              <Link to="/profile/dislikes"
+                className={`nav-link ${location.pathname.indexOf('dislikes') >= 0 ? 'active' : ''}`}>
+                Dislikes</Link>
             </li>
           </ul>
         </div>

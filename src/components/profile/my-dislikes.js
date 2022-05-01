@@ -9,10 +9,15 @@ const MyDislikes = () => {
         .then((tuits) => setDislikedTuis(tuits));
 
     useEffect(findTuitsDislike, []);
+    console.log("disliked tuits");
+    console.log(dislikedTuits.map(dislike => { return dislike.tuit }));
 
     return (
         <div>
-            <Tuits tuits={dislikedTuits} refreshTuits={findTuitsDislike} />
+            <h2>My Dislikes</h2>
+            <Tuits
+                tuits={dislikedTuits.map(dislike => { return dislike.tuit })}
+                refreshTuits={findTuitsDislike} />
         </div>
     );
 };
