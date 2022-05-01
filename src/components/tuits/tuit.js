@@ -4,9 +4,10 @@ import TuitImage from "./tuit-image";
 import TuitVideo from "./tuit-video";
 import { Link } from "react-router-dom";
 import * as likesService from "../../services/likes-service.js"
+import * as dislikesService from "../../services/dislikes-service.js"
 
 
-const Tuit = ({ tuit, deleteTuit, likeTuit }) => {
+const Tuit = ({ tuit, deleteTuit, likeTuit, dislikeTuit }) => {
   const daysOld = (tuit) => {
     const now = new Date();
     const nowMillis = now.getTime();
@@ -30,7 +31,10 @@ const Tuit = ({ tuit, deleteTuit, likeTuit }) => {
     return old;
   }
 
+  // set whether the likes and dislikes should display as active
   const [userLikedTuit, setUserLikedTuit] = useState(false);
+  const [userDislikedTuit, setUserDislikedTuit] = useState(false);
+
   useEffect(() => {
     if (tuit) {
       likesService.findUserLikesTuit("me", tuit._id).then(response => {
@@ -41,7 +45,15 @@ const Tuit = ({ tuit, deleteTuit, likeTuit }) => {
     }
   }, [])
 
-
+  useEffect(() => {
+    if (tuit) {
+      dislikesService.findUserDislikesTuit("me", tuit._id).then(response => {
+        if (response) {
+          setUserDislikedTuit(true);
+        }
+      });
+    }
+  }, [])
 
   return (
     <li className="p-2 ttr-tuit list-group-item d-flex rounded-0">
@@ -71,9 +83,12 @@ const Tuit = ({ tuit, deleteTuit, likeTuit }) => {
           tuit.image &&
           <TuitImage tuit={tuit} />
         }
-        <TuitStats tuit={tuit}
+        <TuitStats
+          tuit={tuit}
           likeTuit={likeTuit}
+          dislikeTuit={dislikeTuit}
           userLikedTuit={userLikedTuit}
+          userDislikedTuit={userDislikedTuit}
         />
       </div>
     </li>

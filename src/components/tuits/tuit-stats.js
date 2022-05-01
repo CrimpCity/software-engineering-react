@@ -1,12 +1,22 @@
 import { React, useState, useEffect } from "react";
 
 
-const TuitStats = ({ tuit, likeTuit = () => { }, userLikedTuit, }) => {
+const TuitStats = ({
+  tuit,
+  likeTuit = () => { },
+  dislikeTuit = () => { },
+  userLikedTuit,
+  userDisikedTuit }) => {
 
   const [liked, setLiked] = useState(userLikedTuit);
+  const [disliked, setDisliked] = useState(userDislikedTuit);
 
   useEffect(
     () => { setLiked(userLikedTuit); }, [userLikedTuit]
+  );
+
+  useEffect(
+    () => { setDisliked(userDisikedTuit); }, [userDisikedTuit]
   );
 
 
@@ -25,6 +35,8 @@ const TuitStats = ({ tuit, likeTuit = () => { }, userLikedTuit, }) => {
           () => {
             likeTuit(tuit)
             setLiked(!liked)
+            // only allow one active thumb up or down
+            setDisliked(false)
           }}>
           {
             tuit.stats && tuit.stats.likes > 0 && liked &&
@@ -36,15 +48,29 @@ const TuitStats = ({ tuit, likeTuit = () => { }, userLikedTuit, }) => {
           }
           {tuit.stats && tuit.stats.likes}
         </span>
+
       </div>
       <div className="col">
-        <span >
+        <span onClick={
+          () => {
+            dislikeTuit(tuit)
+            setDisliked(!disliked)
+            // only allow one active thumb up or down
+            setLiked(false)
+          }}>
           {
-            tuit.stats &&
+            tuit.stats && tuit.stats.dislikes > 0 && disliked &&
+            <i className="fas fa-thumbs-down" style={{ color: 'red' }}></i>
+          }
+          {
+            tuit.stats && !disliked &&
             <i className="fa-regular fa-thumbs-down"></i>
           }
           {tuit.stats && tuit.stats.dislikes}
         </span>
+
+
+
       </div>
       <div className="col">
         <i className="far fa-inbox-out"></i>
