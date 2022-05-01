@@ -1,5 +1,5 @@
 import Tuits from "../tuits";
-import * as service from "../../services/dislikes-service";
+import * as service from "../../services/dislikes-service.js";
 import { useEffect, useState } from "react";
 
 
@@ -9,8 +9,6 @@ const MyDislikes = () => {
         .then((tuits) => setDislikedTuis(tuits));
 
     useEffect(findTuitsDislike, []);
-    console.log("disliked tuits");
-    console.log(dislikedTuits.map(dislike => { return dislike.tuit }));
 
     return (
         <div>
