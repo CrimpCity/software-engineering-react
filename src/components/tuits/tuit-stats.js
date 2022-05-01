@@ -6,7 +6,7 @@ const TuitStats = ({
   likeTuit = () => { },
   dislikeTuit = () => { },
   userLikedTuit,
-  userDisikedTuit }) => {
+  userDislikedTuit }) => {
 
   const [liked, setLiked] = useState(userLikedTuit);
   const [disliked, setDisliked] = useState(userDislikedTuit);
@@ -16,7 +16,7 @@ const TuitStats = ({
   );
 
   useEffect(
-    () => { setDisliked(userDisikedTuit); }, [userDisikedTuit]
+    () => { setDisliked(userDislikedTuit); }, [userDislikedTuit]
   );
 
 
