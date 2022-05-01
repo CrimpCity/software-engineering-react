@@ -1,31 +1,48 @@
-import React from "react";
+import { React, useState, useEffect } from "react";
 
-const TuitStats = ({ tuit, likeTuit = () => { } }) => {
+const TuitStats = ({ tuit, likeTuit = () => { }, userLikedTuit, }) => {
+
+  const [liked, setLiked] = useState(userLikedTuit);
+
+  useEffect(
+    () => { setLiked(userLikedTuit); }, [userLikedTuit]
+  );
+
+
   return (
     <div className="row mt-2">
       <div className="col">
         <i className="far fa-message me-1"></i>
-        {tuit.stats &&
-          <span className="ttr-stats-replies">{tuit.stats.replies}</span>
-        }
+        {tuit.stats && tuit.stats.replies}
       </div>
       <div className="col">
         <i className="far fa-retweet me-1"></i>
-        {tuit.stats &&
-          <span className="ttr-stats-retuits">{tuit.stats.retuits}</span>
-        }
+        {tuit.stats && tuit.stats.retuits}
       </div>
       <div className="col">
-        <span className="ttr-like-tuit-click" onClick={() => likeTuit(tuit)}>
+        <span onClick={
+          () => {
+            likeTuit(tuit)
+            setLiked(!liked)
+          }}>
           {
-            tuit.stats && tuit.stats.likes && tuit.stats.likes > 0 &&
-            <i className="fas fa-heart me-1" style={{ color: 'red' }}></i>
+            tuit.stats && tuit.stats.likes > 0 && liked &&
+            <i className="fas fa-thumbs-up" style={{ color: 'red' }}></i>
           }
           {
-            tuit.stats && tuit.stats.likes && tuit.stats.likes <= 0 &&
-            <i className="far fa-heart me-1"></i>
+            tuit.stats && !liked &&
+            <i className="far fa-thumbs-up"></i>
           }
-          <span className="ttr-stats-likes">{tuit.stats && tuit.stats.likes}</span>
+          {tuit.stats && tuit.stats.likes}
+        </span>
+      </div>
+      <div className="col">
+        <span >
+          {
+            tuit.stats &&
+            <i className="fa-regular fa-thumbs-down"></i>
+          }
+          {tuit.stats && tuit.stats.dislikes}
         </span>
       </div>
       <div className="col">
